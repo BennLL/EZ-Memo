@@ -12,11 +12,20 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _title() {
-    return const Text('Firebase Auth');
+    return const Text('EZ Memo');
   }
 
   Widget _userUid() {
-    return Text(user?.email ?? 'User email');
+    return Text(
+      user?.email ?? 'User email',
+      style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Colors.blue,
+        fontStyle: FontStyle.italic,
+        decoration: TextDecoration.underline,
+      ),
+    );
   }
 
   Widget _signOutButton() {
@@ -35,10 +44,10 @@ class HomePage extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(5),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             _userUid(),
             _signOutButton(),
