@@ -21,25 +21,22 @@ class _addState extends State<add> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           data.child('notes').push().child(title.text).set({
             "content": content.text,
           }).asStream();
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => WidgetTree()));
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => WidgetTree()));
         },
-        
         child: Icon(
           Icons.save,
           color: Colors.orange,
         ),
       ),
-
       appBar: AppBar(
         title: Text("Your new memo..."),
       ),
-
       body: Column(children: [
         TextField(
           controller: title,
