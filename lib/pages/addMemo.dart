@@ -31,8 +31,10 @@ class _addState extends State<add> {
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          data.child(user!.uid).push().child(title.text).set({
-            "content": content.text,
+          String noteTitle = title.text.isNotEmpty ? title.text : "Untitled";
+          String noteContent = content.text.isNotEmpty ? content.text : "";
+          data.child(user!.uid).push().child(noteTitle).set({
+            "content": noteContent,
           }).asStream();
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (_) => WidgetTree()));

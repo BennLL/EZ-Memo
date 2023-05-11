@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'addMemo.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'dart:math';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -19,14 +20,27 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _userUid() {
-    return Text(
-      user?.email ?? 'User email',
-      style: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: Colors.blue,
-        fontStyle: FontStyle.italic,
-        decoration: TextDecoration.underline,
+    return Container(
+      padding: EdgeInsets.fromLTRB(5, 6, 0, 10),
+      height: 37.5,
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(2),
+      ),
+      width: 230,
+      child: Text(
+        user?.email ?? 'User email',
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Colors.blue,
+          fontStyle: FontStyle.italic,
+          decoration: TextDecoration.underline,
+        ),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
@@ -39,7 +53,6 @@ class HomePage extends StatelessWidget {
   }
 
   final DatabaseReference DATA = FirebaseDatabase.instance.ref();
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +68,27 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            _userUid(),
-            _signOutButton(),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => add(),
-                ));
-              },
-              child: const Text('Add'),
+            Row(
+              children: [
+                _userUid(),
+                _signOutButton(),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => add(),
+                    ));
+                  },
+                  child: const Text('Add'),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ), // Adjust the padding values to change the button size
+                  ),
+                ),
+              ],
             ),
+            Text('Your Notes:'),
             Flexible(
               child: FirebaseAnimatedList(
                 shrinkWrap: true,
@@ -74,7 +98,6 @@ class HomePage extends StatelessWidget {
                   String noteId = snapshot.key ?? '';
                   String title = '';
                   String content = '';
-
                   if (snapshot.value != null) {
                     Map<dynamic, dynamic> noteMap =
                         snapshot.value as Map<dynamic, dynamic>;
@@ -84,15 +107,28 @@ class HomePage extends StatelessWidget {
                       content = entry.value['content'].toString();
                     }
                   }
-
-                  return ListTile(
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () =>
-                          DATA.child(user!.uid).child(noteId).remove(),
+                  return Container(
+                    height: 90,
+                    color: Color(Random().nextInt(0xffffffff)),
+                    child: ListTile(
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () =>
+                            DATA.child(user!.uid).child(noteId).remove(),
+                      ),
+                      title: Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        content,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    title: Text(title),
-                    subtitle: Text(content),
                   );
                 },
               ),
