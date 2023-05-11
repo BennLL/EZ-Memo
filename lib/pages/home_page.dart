@@ -40,6 +40,7 @@ class HomePage extends StatelessWidget {
 
   final DatabaseReference DATA = FirebaseDatabase.instance.ref();
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +68,7 @@ class HomePage extends StatelessWidget {
             Flexible(
               child: FirebaseAnimatedList(
                 shrinkWrap: true,
-                query: DATA.child('notes'),
+                query: DATA.child(user!.uid),
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
                   String noteId = snapshot.key ?? '';
@@ -88,7 +89,7 @@ class HomePage extends StatelessWidget {
                     trailing: IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () =>
-                          DATA.child('notes').child(noteId).remove(),
+                          DATA.child(user!.uid).child(noteId).remove(),
                     ),
                     title: Text(title),
                     subtitle: Text(content),

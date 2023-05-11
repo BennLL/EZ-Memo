@@ -7,8 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 class add extends StatefulWidget {
   add({super.key});
 
-  final User? user = Auth().currentUser;
-
   @override
   State<add> createState() => _addState();
 }
@@ -17,13 +15,23 @@ class _addState extends State<add> {
   TextEditingController title = TextEditingController();
   TextEditingController content = TextEditingController();
   final DatabaseReference data = FirebaseDatabase.instance.ref();
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    user = Auth().currentUser;
+  }
 
   @override
   Widget build(BuildContext context) {
+    // final screenHeight = MediaQuery.of(context).size.height;
+    // final appBarHeight = AppBar().preferredSize.height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          data.child('notes').push().child(title.text).set({
+          data.child(user!.uid).push().child(title.text).set({
             "content": content.text,
           }).asStream();
           Navigator.pushReplacement(
@@ -37,22 +45,34 @@ class _addState extends State<add> {
       appBar: AppBar(
         title: Text("Your new memo..."),
       ),
-      body: Column(children: [
-        TextField(
-          controller: title,
-          decoration: InputDecoration(
-            hintText: "Name of Memo",
+      body: Column(
+        children: [
+          TextField(
+            controller: title,
+            decoration: InputDecoration(
+              hintText: "Name of Memo",
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            ),
           ),
-        ),
-        TextField(
-          controller: content,
-          keyboardType: TextInputType.multiline,
-          maxLines: null,
-          decoration: InputDecoration(
-            hintText: "Contents...",
-          ),
-        ),
-      ]),
+          SizedBox(
+            // height: screenHeight - appBarHeight - kToolbarHeight,
+            height: MediaQuery.of(context).size.height - 170,
+            child: SingleChildScrollView(
+              child: TextField(
+                controller: content,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                scrollPhysics: ClampingScrollPhysics(),
+                decoration: InputDecoration(
+                  hintText: "Contents...",
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
