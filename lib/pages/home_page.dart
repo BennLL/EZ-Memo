@@ -14,27 +14,24 @@ class HomePage extends StatelessWidget {
 
   Color getRandomShade() {
     Random random = Random();
-    int num = random.nextInt(7);
+    int num = random.nextInt(6);
     if (num == 0) {
-      return Color.fromARGB(255, 114, 134, 211);
+      return Color.fromARGB(255, 185, 243, 252);
     }
     if (num == 1) {
-      return Color.fromARGB(255, 142, 167, 233);
+      return Color.fromARGB(255, 174, 226, 255);
     }
     if (num == 2) {
-      return Color.fromARGB(255, 229, 224, 255);
+      return Color.fromARGB(255, 147, 198, 231);
     }
     if (num == 3) {
-      return Color.fromARGB(255, 255, 242, 242);
+      return Color.fromARGB(255, 254, 222, 255);
     }
     if (num == 4) {
-      return Color.fromARGB(255, 176, 218, 255);
+      return Color.fromARGB(255, 236, 242, 255);
     }
     if (num == 5) {
-      return Color.fromARGB(255, 185, 233, 252);
-    }
-    if (num == 6) {
-      return Color.fromARGB(255, 218, 245, 255);
+      return Color.fromARGB(255, 227, 223, 253);
     }
 
     return Color.fromARGB(255, 256, 256, 256);
@@ -152,6 +149,8 @@ class HomePage extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (BuildContext context) => edit(
                             noteId: noteId,
+                            title: title,
+                            content: content,
                           ),
                         ));
                       },
