@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ez_memo/auth.dart';
 import 'package:flutter/material.dart';
 import 'addMemo.dart';
+import 'edit_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'dart:math';
@@ -10,6 +11,34 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   final User? user = Auth().currentUser;
+
+  Color getRandomShade() {
+    Random random = Random();
+    int num = random.nextInt(7);
+    if (num == 0) {
+      return Color.fromARGB(255, 114, 134, 211);
+    }
+    if (num == 1) {
+      return Color.fromARGB(255, 142, 167, 233);
+    }
+    if (num == 2) {
+      return Color.fromARGB(255, 229, 224, 255);
+    }
+    if (num == 3) {
+      return Color.fromARGB(255, 255, 242, 242);
+    }
+    if (num == 4) {
+      return Color.fromARGB(255, 176, 218, 255);
+    }
+    if (num == 5) {
+      return Color.fromARGB(255, 185, 233, 252);
+    }
+    if (num == 6) {
+      return Color.fromARGB(255, 218, 245, 255);
+    }
+
+    return Color.fromARGB(255, 256, 256, 256);
+  }
 
   Future<void> signOut() async {
     await Auth().signOut();
@@ -24,10 +53,8 @@ class HomePage extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(5, 6, 0, 10),
       height: 37.5,
       decoration: BoxDecoration(
-        border: Border.all(
-          width: 2,
-        ),
-        borderRadius: BorderRadius.circular(2),
+        border: Border.all(width: 2, color: Color.fromARGB(255, 94, 90, 90)),
+        borderRadius: BorderRadius.circular(8),
       ),
       width: 230,
       child: Text(
@@ -108,25 +135,44 @@ class HomePage extends StatelessWidget {
                     }
                   }
                   return Container(
+                    margin: EdgeInsets.only(bottom: 3),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color.fromARGB(
+                            255, 126, 121, 121), // Set the border color
+                        width: 2.0, // Set the border width
+                      ),
+                      borderRadius: BorderRadius.circular(
+                          8.0), // Set border radius if desired
+                      color: getRandomShade(), // Set the background color here
+                    ),
                     height: 90,
-                    color: Color(Random().nextInt(0xffffffff)),
-                    child: ListTile(
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () =>
-                            DATA.child(user!.uid).child(noteId).remove(),
-                      ),
-                      title: Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) => edit(
+                            noteId: noteId,
+                          ),
+                        ));
+                      },
+                      child: ListTile(
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () =>
+                              DATA.child(user!.uid).child(noteId).remove(),
                         ),
-                      ),
-                      subtitle: Text(
-                        content,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
+                        title: Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          content,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
                   );
