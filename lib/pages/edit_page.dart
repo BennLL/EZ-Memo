@@ -40,7 +40,11 @@ class _editState extends State<edit> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             String updatedTitle = title.text.isNotEmpty ? title.text : "Unititled";
-            String updatedContent = content.text.isNotEmpty ? title.text : "";
+            String updatedContent = content.text.isNotEmpty ? content.text : "";
+            data.child(user!.uid).child(widget.noteId).remove();
+            data.child(user!.uid).push().child(updatedTitle).set({
+            "content": updatedContent,
+          }).asStream();
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (_) => WidgetTree()));
           },
