@@ -116,6 +116,7 @@ class HomePage extends StatelessWidget {
             Flexible(
               child: FirebaseAnimatedList(
                 shrinkWrap: true,
+                reverse: true,
                 query: DATA.child(user!.uid),
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
