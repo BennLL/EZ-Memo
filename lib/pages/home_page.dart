@@ -7,34 +7,32 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'dart:math';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final User? user = Auth().currentUser;
 
   Color getRandomShade() {
     Random random = Random();
-    int num = random.nextInt(6);
+    int num = random.nextInt(4);
     if (num == 0) {
-      return Color.fromARGB(255, 185, 243, 252);
+      return Color.fromARGB(255, 239, 255, 253);
     }
     if (num == 1) {
-      return Color.fromARGB(255, 174, 226, 255);
+      return Color.fromARGB(255, 184, 255, 249);
     }
     if (num == 2) {
-      return Color.fromARGB(255, 147, 198, 231);
+      return Color.fromARGB(255, 133, 244, 255);
     }
     if (num == 3) {
-      return Color.fromARGB(255, 254, 222, 255);
+      return Color.fromARGB(255, 66, 194, 255);
     }
-    if (num == 4) {
-      return Color.fromARGB(255, 236, 242, 255);
-    }
-    if (num == 5) {
-      return Color.fromARGB(255, 227, 223, 253);
-    }
-
-    return Color.fromARGB(255, 256, 256, 256);
+    return Color.fromARGB(255, 255, 255, 255);
   }
 
   Future<void> signOut() async {

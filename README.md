@@ -1,16 +1,16 @@
-# ez_memo
+<h1>EZ Memo</h1>
+Made with
 
-A new Flutter project.
+![Flutter](https://img.shields.io/badge/-Flutter-02569B?logo=flutter&logoColor=white&style=flat)
+![Dart](https://img.shields.io/badge/-Dart-0175C2?logo=dart&logoColor=white&style=flat)
+![Firebase Authentication](https://img.shields.io/badge/-Firebase%20Authentication-FFCA28?logo=firebase&logoColor=black&style=flat)
+![Firebase Realtime Database](https://img.shields.io/badge/-Firebase%20Realtime%20Database-FFCA28?logo=firebase&logoColor=black&style=flat)
+![Android Studio](https://img.shields.io/badge/-Android%20Studio-3DDC84?logo=android&logoColor=white&style=flat)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+<h3>Functions</h3>
+<p>EZ Memo provides users with a convenient way to create and manage their memos on their mobile devices. The app uses the power of Firebase Authentication to enable users to securely log in and log out of their accounts and users can easily create an account, log in with their credentials, and access their personal memos.</p>
 
-A few resources to get you started if this is your first Flutter project:
+<p>To store and manage the memos, the app utilizes Firebase Realtime Database. Each user's memos are linked to their specific accounts, allowing for personalized and private memo management. The Realtime Database ensures that memos are stored in a synchronized manner, enabling users to access their memos across multiple devices in real-time.</p>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p>A simple user-friendly interface is used for users to create, edit, and delete their memos.</p>
