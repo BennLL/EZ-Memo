@@ -14,3 +14,7 @@ Made with
 <p>To store and manage the memos, the app utilizes Firebase Realtime Database. Each user's memos are linked to their specific accounts, allowing for personalized and private memo management. The Realtime Database ensures that memos are stored in a synchronized manner, enabling users to access their memos across multiple devices in real-time.</p>
 
 <p>A simple user-friendly interface is used for users to create, edit, and delete their memos.</p>
+
+![Showcase](https://img.shields.io/badge/-Showcase-9B59B6?style=flat)
+<br>
+![appdemo](https://github.com/BennLL/EZ-Memo/assets/110274203/89117f69-8618-4138-9656-80ba941806a2)
