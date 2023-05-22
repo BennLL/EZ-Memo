@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _title() {
-    return const Text('Firebase Auth');
+    return const Text('Firebase Authentication');
   }
 
   Widget _entryField(
@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _errorMessage() {
-    return Text(errorMessage == '' ? '' : 'Humm ? $errorMessage');
+    return Text(errorMessage == '' ? '' : 'Hmmmm, $errorMessage');
   }
 
   Widget _submitButton() {
@@ -95,6 +95,13 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text(
+                "EZ Memo",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               _entryField('Email', _controllerEmail),
               _entryField('Password', _controllerPassword),
               _errorMessage(),
